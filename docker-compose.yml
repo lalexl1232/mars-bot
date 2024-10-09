@@ -1,0 +1,26 @@
+services:
+  bot:
+    build: .
+    volumes:
+      - .:/app
+    restart: always
+    environment:
+      TELEGRAM_TOKEN: '6573591514:AAEYRG2huRqTjkSOn72MmlDrxteTBOeCYV4'
+      DATABASE_URL: 'postgresql://lalexl:1232@db:5432/mars'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: lalexl
+      POSTGRES_PASSWORD: 1232
+      POSTGRES_DB: mars
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
